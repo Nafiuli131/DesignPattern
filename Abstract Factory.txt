@@ -1,0 +1,70 @@
+// Abstract Products
+interface Button {
+    void paint();
+}
+
+interface Checkbox {
+    void paint();
+}
+
+// Concrete Products - Windows
+class WindowsButton implements Button {
+    public void paint() {
+        System.out.println("Rendering Windows Button");
+    }
+}
+class WindowsCheckbox implements Checkbox {
+    public void paint() {
+        System.out.println("Rendering Windows Checkbox");
+    }
+}
+
+// Concrete Products - Mac
+class MacButton implements Button {
+    public void paint() {
+        System.out.println("Rendering Mac Button");
+    }
+}
+class MacCheckbox implements Checkbox {
+    public void paint() {
+        System.out.println("Rendering Mac Checkbox");
+    }
+}
+
+// Abstract Factory
+interface GUIFactory {
+    Button createButton();
+    Checkbox createCheckbox();
+}
+
+// Concrete Factories
+class WindowsFactory implements GUIFactory {
+    public Button createButton() {
+        return new WindowsButton();
+    }
+    public Checkbox createCheckbox() {
+        return new WindowsCheckbox();
+    }
+}
+
+class MacFactory implements GUIFactory {
+    public Button createButton() {
+        return new MacButton();
+    }
+    public Checkbox createCheckbox() {
+        return new MacCheckbox();
+    }
+}
+
+// Client code
+public class AbstractFactoryDemo {
+    public static void main(String[] args) {
+        GUIFactory factory = new MacFactory(); // or new WindowsFactory();
+        Button button = factory.createButton();
+        Checkbox checkbox = factory.createCheckbox();
+
+        button.paint();      // Output: Rendering Mac Button
+        checkbox.paint();    // Output: Rendering Mac Checkbox
+    }
+}
+
